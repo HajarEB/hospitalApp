@@ -15,7 +15,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/HajarEB/hospital-app-main.git'
+                git branch: 'main', url: 'https://github.com/HajarEB/hospitalApp.git'
             }
         }
         stage('SAST - SonarQube'){
@@ -101,7 +101,8 @@ pipeline{
             steps{
                 sh "chmod 777 \$(pwd)"
                 sh "docker run --rm -v \$(pwd):/zap/wrk/:rw --name owasp -dt zaproxy/zap-stable /bin/bash"
-                sh "docker exec owasp zap-baseline.py -t http://192.168.63.133:4200/ -I -j --auto -r DAST_Report.html"
+                // Change the link below to the address of your application
+                sh "docker exec owasp zap-baseline.py -t https://192.168.63.133:4200/ -I -j --auto -r DAST_Report.html"
             }
         }
     }
