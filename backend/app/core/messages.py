@@ -28,6 +28,7 @@ expired_token = "Token has expired"
 email_used= "This Email is Already in Use"
 username_used= "This Username is Already in Use"
 phone_number_used = "This Phone Number is Already in Use"
+weak_password = "Weak Password!"
 
 user_role_change = "User Role Can't Be Changed"
 status_expiry_change = "Status Expiry Can't be Changed"

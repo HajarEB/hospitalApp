@@ -10,10 +10,10 @@ from schemas.user import UserCreate
 from schemas.token import Token, tokenValue
 from core.security import hash_password, create_access_token, decode_token, decode_expired_token 
 from core.config import settings
-from core.utils import authenticate_user, get_current_user, is_name_valid, is_email_valid, is_phone_number_valid 
+from core.utils import authenticate_user, get_current_user, is_name_valid, is_email_valid, is_phone_number_valid, is_strong_password
 from database import get_db
 from datetime import datetime, timedelta
-from core.messages import username_used, email_used, invalid_name, already_logged_out, phone_number_used
+from core.messages import username_used, email_used, invalid_name, already_logged_out, phone_number_used, weak_password
 from core.encryption import encrypt, hash_lookup, user_hash
 router = APIRouter()
 
@@ -28,6 +28,9 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)):
     if existing_user:
         raise HTTPException(status_code=400, detail=username_used)
     email_hash = hash_lookup(user_data.email)
+
+    if not is_strong_password(user_data.password):
+        raise HTTPException(status_code=400, detail=weak_password)
     
     existed_email = db.query(User).filter(User.email_hash == email_hash).first()
     if existed_email:

@@ -14,6 +14,7 @@ import { ConfigService } from '../../services/config.service';
 export class SignUpComponent{
   configService = inject(ConfigService);
   router = inject(Router);
+  isWeakPassword = false;
 
   registerForm: any = {
     "username": "",
@@ -34,6 +35,9 @@ export class SignUpComponent{
         console.error(error);
         if (error.error && error.error.detail) {
           alert(`Signup failed: ${error.error.detail}`);
+          if (error.error.detail == "Weak Password!"){
+            this.isWeakPassword = true;
+          }
         } else {
           alert("Signup failed: An unexpected error occurred.");
         }

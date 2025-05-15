@@ -27,6 +27,16 @@
           <label class="form-label">Phone number</label>
           <input type="text" class="form-control" name="phone_number" [(ngModel)]="registerForm.phone_number" placeholder="+358 123456789">
         </div>
+        <div class="col-12" *ngIf="isWeakPassword">
+          <small style="color: red; font-size:0.9rem;">
+            Password should meet criteria such as:<br>
+              - Minimum length: 8 characters<br>
+              - At least one uppercase<br>
+              - At least one lowercase<br>
+              - At least one digit<br>
+              - At least one special character (e.g., !#$%^*)<br>
+          </small>
+        </div>
         <div class="col-12 d-flex justify-content-center">
             <div class="col-3">
                 <button type="submit" class="btn btn-primary" (click)="onSignUp()">Sign up</button>

@@ -182,3 +182,14 @@ def is_phone_number_valid(number: str):
         if re.match(r'^\+\d{1,3}\d{8,14}$',number):
             return True
     raise HTTPException(status_code=400, detail=invalid_phone_number)
+
+def is_strong_password(password: str):
+    # Password should meet criteria such as:
+    # Minimum length: 8 characters
+    # At least one uppercase
+    # At least one lowercase
+    # At least one digit
+    # At least one special character
+    if len(password) < 8 or not re.search(r'[A-Z]', password) or not re.search(r'[a-z]', password) or not re.search(r'\d', password) or not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+        return False
+    return True
