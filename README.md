@@ -56,7 +56,7 @@ This application can be run manually on local machine or by using **Docker conta
   ```
 
 ### Option 2: Use Docker
-- Ensure your are in the root folder `HospitalApp`
+- Ensure your are in the root folder `hospitalApp`
 - Run docker with this command:
   ```bash
   docker-compose up --build
